@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-const Utilizadores = require("../Models/utilizadores")
+const Utilizadores = require("../Models/utilizadores.js")
 
 router.get("/", (req, res) => {
 
@@ -12,3 +12,5 @@ router.get("/", (req, res) => {
         }
     })
 })
+
+module.exports = router
