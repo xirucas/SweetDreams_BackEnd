@@ -18,9 +18,9 @@ connect.then(() => {
     let hoteisEndPoint = require("./Controllers/hoteis.js")
 
     app.use(function (req, res, next) {
-        console.log("Novo pedido efetuado " + req.method + " na rota " + req.route)
+        console.log("Novo pedido efetuado " + req.method + " na rota " + req.url)
         next()
-    }) 
+    })
 
     app.use("/utilizadores", utilizadoresEndPoint)
     app.use("/reservas", reservasEndPoint)
@@ -28,8 +28,7 @@ connect.then(() => {
     app.use("/hoteis", hoteisEndPoint)
 
     app.listen(port, () => console.log("BackEnd SweetDreams iniciado na porta", port))
+}).catch(err => {
+    console.log("Impossivel connectar á base de dados! " + err)
+    process.exit()
 })
-.catch(err => {
-        console.log("Impossivel connectar á base de dados! " + err)
-        process.exit()
-    })

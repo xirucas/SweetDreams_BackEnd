@@ -24,6 +24,17 @@ const utilizadoresSchema = new Schema({
         "type": String,
         "required": true
     },
+    "telefone": {
+        "type": String,
+        "pattern":'^([9][1236])\d{7}',
+        "required": true,
+        "unique":true
+    },
+    "data_nascimento":{
+        "type":"string",
+        "format":"date",
+        "required": true
+    },
     "admin":{
         "type":Boolean,
         "required": true
