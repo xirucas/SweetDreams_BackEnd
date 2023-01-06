@@ -9,20 +9,28 @@ const connect = mongoose.connect(url, { dbName: dbName, useNewUrlParser: true, u
 const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
-const users = require("./Models/utilizadores")
 
 connect.then(() => {
-    console.log("Connected correctly to server");
+    console.log("Base de dados conectada");
 
     let utilizadoresEndPoint = require("./Controllers/utilizadores.js")
+    let reservasEndPoint = require("./Controllers/reservas.js")
+    let quartosEndPoint = require("./Controllers/quartos.js")
+    let hoteisEndPoint = require("./Controllers/hoteis.js")
 
     app.use(function (req, res, next) {
-        console.log("Novo pedido efetuado" + req.method)
+        console.log("Novo pedido efetuado " + req.method + " na rota " + req.route)
         next()
-    })
+    }) 
 
     app.use("/utilizadores", utilizadoresEndPoint)
+    app.use("/reservas", reservasEndPoint)
+    app.use("/quartos", quartosEndPoint)
+    app.use("/hoteis", hoteisEndPoint)
 
-    app.listen(port, () => console.log("SweetDreams BackEnd Iniciado", port))
+    app.listen(port, () => console.log("BackEnd SweetDreams iniciado na porta", port))
 })
-    .catch(err => console.error(err))
+    .catch(err => {
+        console.log("Impossivel connectar á base de dados! " + err)
+        process.exit()
+    })
