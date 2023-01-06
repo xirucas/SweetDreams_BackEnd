@@ -57,13 +57,12 @@ router.post("/", async (req, res) => {
 
 router.put("/:_id", (req, res) => {
 
-    const { nome, apelido, email, password, admin } = (req.body)
-
-    Utilizadores.findByIdAndUpdateOne(req.params._id, { nome, apelido, email, password, admin }).then(() => {
+    Utilizadores.findOneAndUpdate(req.params._id, req.body).then(() => {
         return res.status(200).send("Utilizador alterado")
     }).catch((err) => {
         return res.status(500).send(err || "Erro guardando alterações ao utilizador Id:" + req.params._id)
     })
+
 })
 
 router.delete("/_id", (req, res) => {
