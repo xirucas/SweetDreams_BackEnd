@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const utilizadoresSchema = new Schema({
     "_id":{
-        "type":"string",
+        "type":String,
         "required":true,
         "unique":true
     },
@@ -25,15 +25,21 @@ const utilizadoresSchema = new Schema({
         "required": true
     },
     "telefone": {
-        "type": String,
+        "type": Number,
         "pattern":'^([9][1236])\d{7}',
         "required": true,
         "unique":true
     },
     "data_nascimento":{
-        "type":"string",
+        "type":String,
         "format":"date",
         "required": true
+    },
+    "nif":{
+        "type": Number,
+        "pattern":'\d{9}',
+        "required": true,
+        "unique":true
     },
     "admin":{
         "type":Boolean,

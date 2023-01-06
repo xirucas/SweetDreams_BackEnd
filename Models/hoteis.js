@@ -2,6 +2,11 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
 const hoteisSchema = new Schema({
+    "_id":{
+        "type":String,
+        "required":true,
+        "unique":true
+    },
     "nome": {
         "type": String,
         "required": true
@@ -17,6 +22,10 @@ const hoteisSchema = new Schema({
     "descricao":{
         "type": String,
         "required": true
+    },
+    "disponivel":{
+        "type":Boolean,
+        "required":true
     },
     "serviços": {
         "type": [String],
