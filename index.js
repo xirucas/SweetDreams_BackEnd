@@ -29,7 +29,7 @@ connect.then(() => {
 
     app.listen(port, () => console.log("BackEnd SweetDreams iniciado na porta", port))
 })
-    .catch(err => {
+.catch(err => {
         console.log("Impossivel connectar á base de dados! " + err)
         process.exit()
     })
