@@ -27,7 +27,7 @@ const hoteisSchema = new Schema({
         "type":Boolean,
         "required":true
     },
-    "serviços": {
+    "servicos": {
         "type": [String],
         "required": true
     }

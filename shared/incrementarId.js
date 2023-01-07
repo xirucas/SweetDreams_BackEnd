@@ -1,5 +1,5 @@
 function incrementId(id) {
-    const match = id.match(/[UH](\d+)/);  // Extract the numeric portion of the ID
+    const match = id.match(/[UHQR](\d+)/);  // Extract the numeric portion of the ID
     if (!match) {
       throw new Error(`Invalid ID format: ${id}`);
     }

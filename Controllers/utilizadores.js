@@ -12,6 +12,8 @@ router.get("/", (req, res) => {
         } else {
             return res.status(404).send("Nada encontrado")
         }
+    }).catch((err)=>{
+        return res.status(500).send(err||"Erro devolvendo todos os utilizadores")
     })
 })
 
@@ -70,7 +72,7 @@ router.delete("/:_id", (req, res) => {
         return res.status(200).send("Utilizador excluído com sucesso")
     }).catch((err) => {
         console.log(err)
-        return res.status(500).send(err || "Erro ao eliminar o utilizador Id:" + _id)
+        return res.status(500).send(err || "Erro ao eliminar o utilizador Id:" + req.params._id)
 
     });
 })

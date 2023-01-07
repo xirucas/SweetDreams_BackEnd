@@ -7,6 +7,10 @@ const quartosSchema = new Schema({
         "required":true,
         "unique":true
     },
+    "hotel_id":{
+        "type":String,
+        "required":true
+    },
     "andar":{
         "type":Number,
         "required":true
