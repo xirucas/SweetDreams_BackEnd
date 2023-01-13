@@ -26,18 +26,15 @@ const utilizadoresSchema = new Schema({
     },
     "telefone": {
         "type": Number,
-        "pattern":'^([9][1236])\d{7}',
         "required": true,
         "unique":true
     },
     "data_nascimento":{
         "type":String,
-        "format":"date",
         "required": true
     },
     "nif":{
         "type": Number,
-        "pattern":'\d{9}',
         "required": true,
         "unique":true
     },
