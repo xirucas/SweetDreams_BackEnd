@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
 
 router.patch("/:_id", (req, res) => {
 
-    const { nome, apelido, email, password, telefone, data_nascimento, nif, genero, telefone, admin } = (req.body)
+    const { nome, apelido, email, password, telefone, data_nascimento, nif, genero, admin } = (req.body)
 
     Utilizadores.findOneAndUpdate(req.params._id, { nome, apelido, email, password, telefone, data_nascimento, nif, admin }).then(() => {
         return res.status(200).send("Utilizador alterado")
