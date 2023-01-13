@@ -33,8 +33,9 @@ router.get("/:_id", (req, res) => {
 
 router.post("/", async (req, res) => {
 
-    const { nome, apelido, email, telefone, data_nascimento, nif } = (req.body)
-
+    
+    const { nome, apelido, email, telefone, data_nascimento, nif, genero, telefone } = (req.body)
+    console.log({ nome, apelido, email, telefone, data_nascimento, nif, genero, telefone })
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
             if (result[0] != undefined) {
@@ -49,7 +50,7 @@ router.post("/", async (req, res) => {
 
     const password = bcrypt.hashSync(req.body.password,10)
 
-    Utilizadores.create({ _id, nome, apelido, email, password, telefone, data_nascimento, nif, admin }).then(() => {
+    Utilizadores.create({ _id, nome, apelido, email, password, telefone, data_nascimento, nif, genero, telefone, admin }).then(() => {
         return res.status(200).send("Utilizador adicionado")
     }).catch((err) => {
         return res.status(500).send("Algo falhou tenta novamente criar" || err)
@@ -59,7 +60,7 @@ router.post("/", async (req, res) => {
 
 router.patch("/:_id", (req, res) => {
 
-    const { nome, apelido, email, password, telefone, data_nascimento, nif, admin } = (req.body)
+    const { nome, apelido, email, password, telefone, data_nascimento, nif, genero, telefone, admin } = (req.body)
 
     Utilizadores.findOneAndUpdate(req.params._id, { nome, apelido, email, password, telefone, data_nascimento, nif, admin }).then(() => {
         return res.status(200).send("Utilizador alterado")

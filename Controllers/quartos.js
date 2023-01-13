@@ -27,6 +27,7 @@ router.get('/:id', function (req, res) {
     })
 })
 
+// fazer api para devolver quartos de certo hotel com id
 
 router.post('/', async (req, res) => {
     const { hotel_id , andar, tipo, preco, descricao, disponivel } = (req.body)
