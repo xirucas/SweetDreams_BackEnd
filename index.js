@@ -6,7 +6,9 @@ const url = "mongodb://SweetDreams:Deloitte303@ac-ojuroaf-shard-00-00.2mzcji7.mo
 const dbName = "SweatDreamsDB"
 const connect = mongoose.connect(url, { dbName: dbName, useNewUrlParser: true, useUnifiedTopology: true })
 const port = process.env.PORT || 8080;
-app.use(cors());
+app.use(cors({
+    origin:"*"
+}));
 app.use(express.json());
 
 connect.then(() => {
@@ -16,6 +18,7 @@ connect.then(() => {
     let reservasEndPoint = require("./Controllers/reservas.js")
     let quartosEndPoint = require("./Controllers/quartos.js")
     let hoteisEndPoint = require("./Controllers/hoteis.js")
+    let authEndPoint = require("./Controllers/auth.js")
 
     app.use(function (req, res, next) {
         console.log("Novo pedido efetuado " + req.method + " na rota " + req.url)
@@ -23,6 +26,7 @@ connect.then(() => {
     })
 
     app.use("/utilizadores", utilizadoresEndPoint)
+    app.use("/utilizador", authEndPoint)
     app.use("/reservas", reservasEndPoint)
     app.use("/quartos", quartosEndPoint)
     app.use("/hoteis", hoteisEndPoint)

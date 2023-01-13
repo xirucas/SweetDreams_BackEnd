@@ -20,6 +20,8 @@ const quartosSchema = new Schema({
         "required": true
     },
     "preco": {
+
+
         "type": Number,
         "required": true
     },
@@ -31,6 +33,7 @@ const quartosSchema = new Schema({
         "type":Boolean,
         "required":true
     }
+    
 }, {
     "timestamps": true
 });

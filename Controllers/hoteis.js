@@ -28,6 +28,18 @@ router.get('/:id', function (req, res) {
     })
 })
 
+router.get('/quartos/:id', function (req, res) {
+    Quartos.find({hotel_id: req.params.d}).then((result) => {
+        if (result != null) {
+            return res.status(200).send(result)
+        } else {
+            return res.status(404).send("Nada encontrado")
+        }
+    }).catch((err) => {
+        return res.status(500).send(err || "Erro devolvendo os quartos do hotel com Hotel Id:" + req.params.id)
+    })
+})
+
 router.post('/', async (req, res) => {
     const { nome, cidade, endereco, descricao, disponivel, servicos } = (req.body)
 
@@ -71,7 +83,7 @@ router.delete("/:_id", (req, res) => {
         console.log(err)
         return res.status(500).send(err + " Erro ao eliminar o hotel Id:" + req.params._id)
 
-    });
+    })
 })
 
 

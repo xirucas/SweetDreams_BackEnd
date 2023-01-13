@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 const Utilizadores = require("../Models/utilizadores.js")
 const incrementarId = require('../shared/incrementarId.js');
-
+const bcrypt = require('bcryptjs')
 
 router.get("/", (req, res) => {
 
@@ -33,7 +33,7 @@ router.get("/:_id", (req, res) => {
 
 router.post("/", async (req, res) => {
 
-    const { nome, apelido, email, password, telefone, data_nascimento, nif } = (req.body)
+    const { nome, apelido, email, telefone, data_nascimento, nif } = (req.body)
 
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
@@ -46,6 +46,8 @@ router.post("/", async (req, res) => {
 
     const _id = incrementarId(ultimoId)
     const admin = false
+
+    const password = bcrypt.hashSync(req.body.password,10)
 
     Utilizadores.create({ _id, nome, apelido, email, password, telefone, data_nascimento, nif, admin }).then(() => {
         return res.status(200).send("Utilizador adicionado")
@@ -72,9 +74,9 @@ router.delete("/:_id", (req, res) => {
         return res.status(200).send("Utilizador excluído com sucesso")
     }).catch((err) => {
         console.log(err)
-        return res.status(500).send(err || "Erro ao eliminar o utilizador Id:" + req.params._id)
+        return res.status(500).send(err || "Erro ao eliminar o utilizador Id:" + _id)
 
-    });
+    })
 })
 
 module.exports = router
