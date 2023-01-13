@@ -58,6 +58,7 @@ router.post("/", async (req, res) => {
 
 })
 
+
 router.patch("/:_id", (req, res) => {
 
     const { nome, apelido, email, password, telefone, data_nascimento, nif, genero, admin } = (req.body)
