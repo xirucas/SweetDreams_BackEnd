@@ -34,7 +34,7 @@ router.get("/:_id", (req, res) => {
 router.post("/", async (req, res) => {
 
     
-    const { nome, apelido, email, telefone, data_nascimento, nif, genero,  } = (req.body)
+    const { nome, apelido, email,  telefone, data_nascimento, nif, genero,  } = (req.body)
     console.log({ nome, apelido, email, telefone, data_nascimento, nif, genero })
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
 
     const password = bcrypt.hashSync(req.body.password,10)
 
-    Utilizadores.create({ _id, nome, apelido, email, telefone, data_nascimento, nif, genero, admin }).then(() => {
+    Utilizadores.create({ _id, nome, apelido, password, email, telefone, data_nascimento, nif, genero, admin }).then(() => {
         return res.status(200).send("Utilizador adicionado")
     }).catch((err) => {
         return res.status(500).send("Algo falhou tenta novamente criar" || err)
