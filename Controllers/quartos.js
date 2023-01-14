@@ -27,7 +27,17 @@ router.get('/:id', function (req, res) {
     })
 })
 
-// fazer api para devolver quartos de certo hotel com id
+router.get('/:hotel_id', function (req, res) {
+    Quartos.find({hotel_id: req.params.hotel_id}).then((result) => {
+        if (result != null) {
+            return res.status(200).send(result)
+        } else {
+            return res.status(404).send("Nada encontrado")
+        }
+    }).catch((err) => {
+        return res.status(500).send(err || "Erro devolvendo os quartos do hotel Id:" + req.params.hotel_id)
+    })
+})
 
 router.post('/', async (req, res) => {
     const { hotel_id , andar, tipo, preco, descricao, disponivel } = (req.body)
@@ -62,7 +72,7 @@ router.patch("/:_id", (req,res)=>{
     })
 })
 
-//ainda por mudar
+
 
 router.delete("/:_id", (req, res) => {
     Quartos.findByIdAndDelete(req.params._id, { useFindAndModify: false }).then((result) => {
@@ -73,6 +83,9 @@ router.delete("/:_id", (req, res) => {
 
     })
 })
+
+//delete varios hoteis
+
 
 
 module.exports = router

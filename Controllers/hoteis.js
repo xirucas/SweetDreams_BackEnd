@@ -28,17 +28,7 @@ router.get('/:id', function (req, res) {
     })
 })
 
-router.get('/quartos/:id', function (req, res) {
-    Quartos.find({hotel_id: req.params.d}).then((result) => {
-        if (result != null) {
-            return res.status(200).send(result)
-        } else {
-            return res.status(404).send("Nada encontrado")
-        }
-    }).catch((err) => {
-        return res.status(500).send(err || "Erro devolvendo os quartos do hotel com Hotel Id:" + req.params.id)
-    })
-})
+
 
 router.post('/', async (req, res) => {
     const { nome, cidade, endereco, descricao, disponivel, servicos } = (req.body)
@@ -72,15 +62,10 @@ router.patch("/:_id", (req,res)=>{
 })
 
 router.delete("/:_id", (req, res) => {
-    Hoteis.findByIdAndDelete(req.params._id, { useFindAndModify: false }).then((result) => {
-        Quartos.deleteMany({ hotel_id: req.params._id }).then((result) => {
-            res.status(200)
-        }).catch((err) => {
-            return res.status(500).send(err+ "Erro ao eliminar os quartos do hotel Id: " + req.params._id)
-        });
+    Hoteis.findByIdAndDelete(req.params._id, { useFindAndModify: false })
+    .then((result) => {
         return res.status(200).send("Hotel excluído com sucesso")
     }).catch((err) => {
-        console.log(err)
         return res.status(500).send(err + " Erro ao eliminar o hotel Id:" + req.params._id)
 
     })

@@ -7,20 +7,36 @@ const reservasSchema = new Schema({
         "required":true,
         "unique":true
     },
+    "hotel_id":{
+        "type":String,
+        "required":true
+    },
+    "quarto_id":{
+        "type":String,
+        "required":true
+    },
+    "utilizador_id":{
+        "type":String,
+        "required":true
+    },
+    "data_entrada":{
+        "type":String,
+        "required":true
+    },
+    "data_saida":{
+        "type":String,
+        "required":true
+    },  
     "preco":{
         "type":Number,
         "required":true
     },
-    "data_inicio": {
-        "type": Date,
-        "required": true
-    },
-    "data_fim": {
-        "type": Date,
-        "required": true
+    "estado":{
+        "type":String,
+        "required":true
     },
     "numero_pessoas": {
-        "type": Number,
+        "type":Number,
         "required": true
     }
 }, {

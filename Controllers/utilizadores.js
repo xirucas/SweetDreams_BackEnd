@@ -34,8 +34,7 @@ router.get("/:_id", (req, res) => {
 router.post("/", async (req, res) => {
 
     
-    const { nome, apelido, email,  telefone, data_nascimento, nif, genero,  } = (req.body)
-    console.log({ nome, apelido, email, telefone, data_nascimento, nif, genero })
+    const { nome, apelido, email, telefone, data_nascimento, nif, genero  } = (req.body)
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
             if (result[0] != undefined) {

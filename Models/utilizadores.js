@@ -38,6 +38,10 @@ const utilizadoresSchema = new Schema({
         "required": true,
         "unique":true
     },
+    "genero":{
+        "type":String,
+        "required": true
+    },
     "admin":{
         "type":Boolean,
         "required": true
