@@ -11,10 +11,6 @@ const hoteisSchema = new Schema({
         "type": String,
         "required": true
     },
-    "cidade": {
-        "type": String,
-        "required": true
-    },
     "endereco": {
         "type": String,
         "required": true
