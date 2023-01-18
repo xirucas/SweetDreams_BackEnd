@@ -6,9 +6,7 @@ const url = "mongodb://SweetDreams:Deloitte303@ac-ojuroaf-shard-00-00.2mzcji7.mo
 const dbName = "SweatDreamsDB"
 const connect = mongoose.connect(url, { dbName: dbName, useNewUrlParser: true, useUnifiedTopology: true })
 const port = process.env.PORT || 8080;
-app.use(cors({
-    origin:"*"
-}));
+app.use(cors);
 app.use(express.json());
 
 connect.then(() => {
