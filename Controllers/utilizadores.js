@@ -12,8 +12,8 @@ router.get("/", (req, res) => {
         } else {
             return res.status(404).send("Nada encontrado")
         }
-    }).catch((err)=>{
-        return res.status(500).send(err||"Erro devolvendo todos os utilizadores")
+    }).catch((err) => {
+        return res.status(500).send(err || "Erro devolvendo todos os utilizadores")
     })
 })
 
@@ -33,9 +33,9 @@ router.get("/:_id", (req, res) => {
 
 router.post("/", async (req, res) => {
 
-    
-    const { nome, apelido, email, telefone, data_nascimento, nif, genero, admin  } = (req.body)
-    
+
+    const { nome, apelido, email, telefone, data_nascimento, nif, genero, admin } = (req.body)
+
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
             if (result[0] != undefined) {
@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
 
     const _id = incrementarId(ultimoId)
 
-    const password = bcrypt.hashSync(req.body.password,10)
+    const password = bcrypt.hashSync(req.body.password, 10)
 
     Utilizadores.create({ _id, nome, apelido, password, email, telefone, data_nascimento, nif, genero, admin }).then(() => {
         return res.status(200).send("Utilizador adicionado")
@@ -60,17 +60,21 @@ router.post("/", async (req, res) => {
 
 router.patch("/:_id", (req, res) => {
 
-    Utilizadores.findOneAndUpdate(req.params._id, req.body).then(() => {
-        return res.status(200).send("Utilizador alterado")
+    if (!req.body) {
+        return res.status(400).send("Nada para fazer update");
+      }
+
+    Utilizadores.findByIdAndUpdate(req.params._id, req.body, { useFindAndModify: false }).then((result) => {
+        return res.status(200).send(result);
     }).catch((err) => {
         return res.status(500).send(err || "Erro guardando alterações ao utilizador Id:" + req.params._id)
     })
-    
+
 })
 
 router.delete("/:_id", (req, res) => {
 
-    Utilizadores.findByIdAndDelete(req.params._id, { useFindAndModify: false }).then((result) => {
+    Utilizadores.findByIdAndDelete(req.params._id, { useFindAndModify: false }).then(() => {
         return res.status(200).send("Utilizador excluído com sucesso")
     }).catch((err) => {
         console.log(err)
