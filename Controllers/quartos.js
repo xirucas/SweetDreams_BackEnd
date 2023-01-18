@@ -27,7 +27,7 @@ router.get('/:id', function (req, res) {
     })
 })
 
-router.get('/:hotel_id', function (req, res) {
+router.get('/hotel/:hotel_id', function (req, res) {
     Quartos.find({hotel_id: req.params.hotel_id}).then((result) => {
         if (result != null) {
             return res.status(200).send(result)
