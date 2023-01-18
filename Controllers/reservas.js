@@ -96,8 +96,8 @@ router.post("/", async (req, res) => {
     });
 });
 
-router.put("/:id", function (req, res) {
-    Reservas.findByIdAndUpdate(req.params.id, req.body)
+router.patch("/:_id", function (req, res) {
+    Reservas.findByIdAndUpdate(req.params._id, req.body,{ useFindAndModify: false })
         .then((result) => {
             if (result != null) {
                 return res.status(200).send("Reserva atualizada");

@@ -63,9 +63,8 @@ router.post('/', async (req, res) => {
 
 
 router.patch("/:_id", (req,res)=>{
-    const { hotel_id , andar, tipo, preco, descricao, disponivel } = (req.body)
 
-    Quartos.findOneAndUpdate(req.params._id, { hotel_id , andar, tipo, preco, descricao, disponivel }).then(() => {
+    Quartos.findByIdAndUpdate(req.params._id, req.body,{ useFindAndModify: false }).then(() => {
         return res.status(200).send("quarto alterado")
     }).catch((err) => {
         return res.status(500).send(err || "Erro guardando alterações ao quarto Id:" + req.params._id)
