@@ -38,6 +38,9 @@ const reservasSchema = new Schema({
     "numero_pessoas": {
         "type":Number,
         "required": true
+    },
+    "observacoes":{
+        "type": String,
     }
 }, {
     "timestamps": true
