@@ -34,7 +34,8 @@ router.get("/:_id", (req, res) => {
 router.post("/", async (req, res) => {
 
     
-    const { nome, apelido, email, telefone, data_nascimento, nif, genero  } = (req.body)
+    const { nome, apelido, email, telefone, data_nascimento, nif, genero, admin  } = (req.body)
+    
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
             if (result[0] != undefined) {
@@ -45,7 +46,6 @@ router.post("/", async (req, res) => {
         })
 
     const _id = incrementarId(ultimoId)
-    const admin = false
 
     const password = bcrypt.hashSync(req.body.password,10)
 
@@ -60,9 +60,9 @@ router.post("/", async (req, res) => {
 
 router.patch("/:_id", (req, res) => {
 
-    const { nome, apelido, email, password, telefone, data_nascimento, nif, genero, admin } = (req.body)
+    const { nome, apelido, email, telefone, data_nascimento, nif, genero, admin } = (req.body)
 
-    Utilizadores.findOneAndUpdate(req.params._id, { nome, apelido, email, password, telefone, data_nascimento, nif, admin }).then(() => {
+    Utilizadores.findOneAndUpdate(req.params._id, { nome, apelido, email, telefone, data_nascimento, nif, genero, admin }).then(() => {
         return res.status(200).send("Utilizador alterado")
     }).catch((err) => {
         return res.status(500).send(err || "Erro guardando alterações ao utilizador Id:" + req.params._id)
