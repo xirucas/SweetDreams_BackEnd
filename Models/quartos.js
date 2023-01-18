@@ -11,6 +11,10 @@ const quartosSchema = new Schema({
         "type":String,
         "required":true
     },
+    "numero_quarto":{
+        "type":Number,
+        "required":true
+    },
     "andar":{
         "type":Number,
         "required":true
