@@ -34,6 +34,9 @@ const quartosSchema = new Schema({
     "disponivel":{
         "type":Boolean,
         "required":true
+    },
+    "servicos":{
+        "type":[String],
     }
     
 }, {

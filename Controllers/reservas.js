@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
     preco,
     numero_pessoas,
     estado,
-    observacoes
+    observacoes,
   } = req.body;
 
   const ultimoId = await Reservas.find({})
@@ -88,7 +88,7 @@ router.post("/", async (req, res) => {
     preco,
     numero_pessoas,
     estado,
-    observacoes
+    observacoes,
   })
     .then(() => {
       return res.status(200).send("reserva adicionada");
