@@ -63,7 +63,13 @@ router.patch("/:_id", (req,res)=>{
 router.delete("/:_id", (req, res) => {
     Hoteis.findByIdAndDelete(req.params._id, { useFindAndModify: false })
     .then((result) => {
-        return res.status(200).send("Hotel excluído com sucesso")
+        Quartos.deleteMany({hotel_id: req.params._id}).then((result)=>{
+            return res.status(200).send("Hotel excluído com sucesso")
+        }).catch((err)=>{
+            console.log(err)
+            return res.status(500).send(err + " Erro ao eliminar os quartos do hotel Id:" + req.params._id)
+    })
+        
     }).catch((err) => {
         return res.status(500).send(err + " Erro ao eliminar o hotel Id:" + req.params._id)
 
