@@ -22,7 +22,10 @@ const hoteisSchema = new Schema({
     "disponivel":{
         "type":Boolean,
         "required":true
-    }
+    },
+    "servicos":{
+        "type":[String],
+    },
 }, {
     "timestamps": true
 });
