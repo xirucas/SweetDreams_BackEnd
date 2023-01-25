@@ -37,6 +37,10 @@ const quartosSchema = new Schema({
     },
     "servicos":{
         "type":[String],
+    },
+    "imagens":{
+        "type":[String],
+        "required":true
     }
     
 }, {

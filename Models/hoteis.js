@@ -26,12 +26,12 @@ const hoteisSchema = new Schema({
     "servicos":{
         "type":[String],
     },
+    "imagens":{
+        "type":[String],
+        "required":true
+    }
 }, {
     "timestamps": true
 });
-
-
-
-
 
 module.exports = mongoose.model("Hoteis", hoteisSchema,"Hoteis");

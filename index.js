@@ -17,6 +17,7 @@ connect.then(() => {
     let quartosEndPoint = require("./Controllers/quartos.js")
     let hoteisEndPoint = require("./Controllers/hoteis.js")
     let authEndPoint = require("./Controllers/auth.js")
+    let imagensEndPoint = require("./Controllers(imagens.js")
 
     app.use(function (req, res, next) {
         console.log("Novo pedido efetuado " + req.method + " na rota " + req.url)
@@ -28,6 +29,7 @@ connect.then(() => {
     app.use("/reservas", reservasEndPoint)
     app.use("/quartos", quartosEndPoint)
     app.use("/hoteis", hoteisEndPoint)
+    app.use("/imagens", imagensEndPoint)
 
     app.listen(port, () => console.log("BackEnd SweetDreams iniciado na porta", port))
 }).catch(err => {

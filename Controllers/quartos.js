@@ -40,7 +40,7 @@ router.get('/hotel/:hotel_id', function (req, res) {
 })
 
 router.post('/', async (req, res) => {
-    const { hotel_id , andar, numero_quarto, tipo, preco, descricao, disponivel, servicos } = (req.body)
+    const { hotel_id , andar, numero_quarto, tipo, preco, descricao, disponivel, servicos,imagens } = (req.body)
 
     const ultimoId = await Quartos.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
 
     const _id=incrementarId(ultimoId)
 
-    Quartos.create({ _id, hotel_id , numero_quarto, andar,  tipo, preco, descricao, disponivel, servicos }).then(() => {
+    Quartos.create({ _id, hotel_id , numero_quarto, andar,  tipo, preco, descricao, disponivel, servicos, imagens }).then(() => {
         return res.status(200).send("quarto adicionado")
     }).catch((err) => {
         return res.status(500).send("Algo falhou tenta novamente criar" + err)
@@ -82,10 +82,6 @@ router.delete("/:_id", (req, res) => {
 
     })
 })
-
-//delete varios hoteis
-
-
 
 module.exports = router
 
