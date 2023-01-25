@@ -33,7 +33,7 @@ router.get("/:id", function (req, res) {
     });
 });
 
-router.get("/:hotel_id", function (req, res) {
+router.get("/hotel/:hotel_id", function (req, res) {
   Reservas.find({ hotel_id: req.params.hotel_id })
     .then((result) => {
       if (result != null) {
