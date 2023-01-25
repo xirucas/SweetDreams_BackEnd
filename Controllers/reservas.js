@@ -47,8 +47,22 @@ router.get("/hotel/:hotel_id", function (req, res) {
         .status(500)
         .send(
           err ||
-            "Erro devolvendo as reservas do hotel Id:" + req.params.hotel_id
+          "Erro devolvendo as reservas do hotel Id:" + req.params.hotel_id
         );
+    });
+});
+
+router.get("/user/:user_id", function (req, res) {
+  Reservas.find({ utilizador_id: req.params.user_id })
+    .then((result) => {
+      if (result != null) {
+        return res.status(200).send(result);
+      } else {
+        return res.status(404).send("Nada encontrado");
+      }
+    })
+    .catch((err) => {
+      return res.status(500).send(err || "Erro devolvendo as reservas do utilizador Id:" + req.params.user_id);
     });
 });
 
@@ -99,33 +113,33 @@ router.post("/", async (req, res) => {
 });
 
 router.patch("/:_id", function (req, res) {
-    Reservas.findByIdAndUpdate(req.params._id, req.body,{ useFindAndModify: false })
-        .then((result) => {
-            if (result != null) {
-                return res.status(200).send("Reserva atualizada");
-            } else {
-                return res.status(404).send("Nada encontrado");
-            }
-        })
-        .catch((err) => {
-            return res.status(500).
-                send(err || "Erro atualizando a reserva com Id:" + req.params.id);
-        });
+  Reservas.findByIdAndUpdate(req.params._id, req.body, { useFindAndModify: false })
+    .then((result) => {
+      if (result != null) {
+        return res.status(200).send("Reserva atualizada");
+      } else {
+        return res.status(404).send("Nada encontrado");
+      }
+    })
+    .catch((err) => {
+      return res.status(500).
+        send(err || "Erro atualizando a reserva com Id:" + req.params.id);
+    });
 });
 
 router.delete("/:id", function (req, res) {
-    Reservas.findByIdAndDelete(req.params.id)
-        .then((result) => {
-            if (result != null) {
-                return res.status(200).send("Reserva eliminada");
-            } else {
-                return res.status(404).send("Nada encontrado");
-            }
-        })
-        .catch((err) => {
-            return res.status(500).
-                send(err || "Erro eliminando a reserva com Id:" + req.params.id);
-        });
+  Reservas.findByIdAndDelete(req.params.id)
+    .then((result) => {
+      if (result != null) {
+        return res.status(200).send("Reserva eliminada");
+      } else {
+        return res.status(404).send("Nada encontrado");
+      }
+    })
+    .catch((err) => {
+      return res.status(500).
+        send(err || "Erro eliminando a reserva com Id:" + req.params.id);
+    });
 });
 
 
