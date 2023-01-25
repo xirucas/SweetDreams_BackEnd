@@ -34,7 +34,7 @@ router.get("/:_id", (req, res) => {
 router.post("/", async (req, res) => {
 
 
-    const { nome, apelido, email, telefone, data_nascimento, nif, genero, admin } = (req.body)
+    const { nome, apelido, email, telefone, data_nascimento, nif, genero } = (req.body)
 
     const ultimoId = await Utilizadores.find({}).sort({ _id: -1 }).limit(1)
         .then((result) => {
@@ -46,6 +46,7 @@ router.post("/", async (req, res) => {
         })
 
     const _id = incrementarId(ultimoId)
+    const admin = false
 
     const password = bcrypt.hashSync(req.body.password, 10)
 
